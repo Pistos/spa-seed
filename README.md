@@ -16,8 +16,8 @@ Data persistence managed by [Sequel](http://sequel.jeremyevans.net/), stored in
 
 ### Requirements
 
-* Ruby
-* PostgreSQL
+* [Ruby](https://www.ruby-lang.org/)
+* [PostgreSQL](http://www.postgresql.org/)
 
 It is highly recommended to configure PostgreSQL to allow passwordless local
 connections, for convenience sake.  This is not strictly required, but then
@@ -40,13 +40,19 @@ the burden of making DB authentication work properly becomes yours.
 
 Then start the server with:
 
+``` bash
     ./start-server.sh
+```
 
 Stop the server with SIGINT (Ctrl-C).
 
 ## Frontend
 
 A Single-Page Application (SPA) built with [Vue](http://vuejs.org/).
+
+### Requirements
+
+* [Node.js](https://nodejs.org/) (for npm)
 
 ### Setup
 
