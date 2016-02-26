@@ -48,7 +48,7 @@ Stop the server with SIGINT (Ctrl-C).
 
 ## Frontend
 
-A Single-Page Application (SPA) built with [Vue](http://vuejs.org/).
+A Single-Page Application (SPA) built with [Vue.js](http://vuejs.org/).
 
 ### Requirements
 
