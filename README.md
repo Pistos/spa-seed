@@ -1,5 +1,8 @@
 # SPA Seed
 
+This is seed code for a single-page web application.  Use it as an example, or
+a basis for a full SPA of your own.
+
 ## Features
 
 * Both frontend (client-side / browser) and backend (server-side)
