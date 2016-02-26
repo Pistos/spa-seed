@@ -1,0 +1,6 @@
+db:
+  host: "localhost"
+  database: "spa_seed"
+  username: "spa_seed"
+  password: "spa_seed"
+jwt_secret: ""
