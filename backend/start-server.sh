@@ -1,1 +1,1 @@
-bundle exec ruby -I. websocket-server.rb
+bundle exec ruby -Ilib websocket-server.rb

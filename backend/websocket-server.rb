@@ -2,8 +2,8 @@ require 'em-websocket'
 require 'json'
 require 'jwt'
 
-require 'config'
-require 'model'
+require 'project-name/config'
+require 'project-name/model'
 
 EM.run do
   EM::WebSocket.run(host: "0.0.0.0", port: 8081) do |ws|
@@ -23,9 +23,9 @@ EM.run do
 
       case message
       when '/things'
-        response = Model::Thing.all.map(&:to_serializable)
+        response = ProjectName::Model::Thing.all.map(&:to_serializable)
       when '/things/create'
-        response = Model::Thing.create(
+        response = ProjectName::Model::Thing.create(
           name: args['name'],
           description: args['description']
         ).to_serializable

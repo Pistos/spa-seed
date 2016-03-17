@@ -1,4 +1,4 @@
-require 'config'
+require 'project-name/config'
 
 c = $conf['db']
 host = c['host']

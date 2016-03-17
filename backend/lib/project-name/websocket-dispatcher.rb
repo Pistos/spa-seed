@@ -1,4 +1,4 @@
-module AppName
+module ProjectName
   class WebsocketDispatcher
 
   end
