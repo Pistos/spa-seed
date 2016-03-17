@@ -1,2 +1,2 @@
 #!/bin/sh
-bundle exec ruby -I. migrate.rb
+bundle exec ruby -Ilib migrate.rb

@@ -1,8 +1,7 @@
 require 'json'
 require 'jwt'
 
-require 'project-name/config'
-require 'project-name/model'
+require 'project-name/websocket/handlers'
 
 module ProjectName
   module Websocket
@@ -17,24 +16,24 @@ module ProjectName
       end
 
       def handle
-        response = nil
-
-        case @message
-        when '/things'
-          response = Model::Thing.all.map(&:to_serializable)
-        when '/things/create'
-          response = Model::Thing.create(
-            name: @args['name'],
-            description: @args['description']
-          ).to_serializable
-        end
-
         @ws.send(
           {
             'id' => @id,
-            'response' => response
+            'response' => message_handler.respond
           }.to_json
         )
+      end
+
+      def message_handler
+        case @message
+        when '/things'
+          Websocket::Handler::Things::List.new
+        when '/things/create'
+          Websocket::Handler::Things::Create.new(
+            name: @args['name'],
+            description: @args['description']
+          )
+        end
       end
     end
   end

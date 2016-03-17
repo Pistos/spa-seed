@@ -1,7 +1,9 @@
 require 'yaml'
 
-default_configuration = YAML.load(IO.read('./defaults.yaml'))
-custom_configuration = YAML.load(IO.read('./config.yaml'))
+env = ENV['PROJECT_NAME_ENV'] || 'development'
+
+default_configuration = YAML.load(IO.read('./defaults.yaml'))[env] || {}
+custom_configuration = YAML.load(IO.read('./config.yaml'))[env] || {}
 
 $conf = default_configuration.merge(custom_configuration)
 

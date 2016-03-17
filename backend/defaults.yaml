@@ -1,6 +1,14 @@
-db:
-  host: "localhost"
-  database: "spa_seed"
-  username: "spa_seed"
-  password: "spa_seed"
-jwt_secret: ""
+development:
+  db:
+    host: "localhost"
+    database: "spa_seed"
+    username: "spa_seed"
+    password: "spa_seed"
+  jwt_secret: ""
+test:
+  db:
+    host: "localhost"
+    database: "spa_seed_test"
+    username: "spa_seed"
+    password: "spa_seed"
+  jwt_secret: "test jwt secret"

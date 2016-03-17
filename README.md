@@ -29,12 +29,17 @@ the burden of making DB authentication work properly becomes yours.
     cd backend
     createuser username_you_made_up
     createdb -O username_you_made_up db_name_you_made_up
+    createdb -O username_you_made_up test_db_name_you_made_up
     cp defaults.yaml config.yaml
     ${EDITOR} config.yaml
     # Create gemsets, etc. at this point if desired, then:
     bundle install
     ./migrate.sh
+    PROJECT_NAME_ENV=test ./migrate.sh
 ```
+
+If desired, rename all instances of /project.?name/i throughout the code to
+whatever you want.
 
 ### Usage
 
