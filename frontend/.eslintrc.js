@@ -17,5 +17,6 @@ module.exports = {
     'space-infix-ops': 0,
     'keyword-spacing': 0,
     'space-in-parens': 0,
+    'space-unary-ops': 0,
   }
 }

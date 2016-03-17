@@ -1,1 +1,1 @@
-RUBYLIB=. bundle exec thin -p 8082 start
+bundle exec ruby -I. websocket-server.rb

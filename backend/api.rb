@@ -71,27 +71,4 @@ class API < Grape::API
       end
     end
   end
-
-  resource 'things' do
-    before do
-      authenticate!
-    end
-
-    desc "Return things"
-    get do
-      Model::Thing.all.map(&:to_serializable)
-    end
-
-    desc "Create a thing"
-    params do
-      requires 'name', type: String
-      requires 'description', type: String
-    end
-    post do
-      Model::Thing.create(
-        name: params['name'],
-        description: params['description']
-      ).to_serializable
-    end
-  end
 end
