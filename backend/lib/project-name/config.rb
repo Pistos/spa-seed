@@ -6,6 +6,7 @@ default_configuration = YAML.load(IO.read('./defaults.yaml'))[env] || {}
 custom_configuration = YAML.load(IO.read('./config.yaml'))[env] || {}
 
 $conf = default_configuration.merge(custom_configuration)
+$conf[:env] = env
 
 module ProjectName
   class ConfigError < StandardError; end;
