@@ -26,6 +26,11 @@ module ProjectName
 
       def message_handler
         case @message
+        when '/users/authentications/create'
+          Websocket::Handler::Users::Authentications::Create.new(
+            username: @args['username'],
+            password: @args['password']
+          )
         when '/things'
           Websocket::Handler::Things::List.new
         when '/things/create'

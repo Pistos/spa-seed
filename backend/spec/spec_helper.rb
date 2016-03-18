@@ -1,6 +1,7 @@
 require 'project-name/config'
 require 'project-name/model'
 
+require 'pry'
 require 'factory_girl'
 require 'factories'
 require 'database_cleaner'

@@ -21,7 +21,7 @@ module ProjectName
 
       def self.find_by_creds(username:, plaintext_password:)
         user = Model::User[username: username]
-        user  if user.password == plaintext_password
+        user  if user && user.password == plaintext_password
       end
     end
   end

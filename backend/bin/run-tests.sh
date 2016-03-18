@@ -1,1 +1,1 @@
-PROJECT_NAME_ENV=test bundle exec rspec
+PROJECT_NAME_ENV=test bundle exec rspec "$@"
