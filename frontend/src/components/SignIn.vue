@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import backend from '../backend'
 import JwtInterface from '../JwtInterface'
 
 export default {
@@ -30,19 +31,18 @@ export default {
   },
   methods: {
     submit: function (ev) {
-      let resource = this.$resource('http://'+window.location.hostname+':8082/api/users/authentications')
-      let data = {
-        username: this.username,
-        password: this.password,
-      }
-
-      resource.save(data).then(
+      let self = this
+      backend.actions.userAuthenticationCreate(
+        this.username,
+        this.password,
         function (response) {
-          JwtInterface.actions.set(response.data.jwt)
-          this.$router.go('/home')
-        },
-        function (response) {
-          console.log('Failed to authenticate.')
+          if( response.error ) {
+            console.log('Sign in error: ' + response.error)
+          } else {
+            console.log('Sign in successful')
+            JwtInterface.actions.set(response.jwt)
+            self.$router.go('/home')
+          }
         }
       )
     },

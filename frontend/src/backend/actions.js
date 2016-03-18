@@ -48,3 +48,14 @@ export const userCreate = ({dispatch, state}, username, password, onSuccess) => 
   )
 }
 
+export const userAuthenticationCreate = ({dispatch, state}, username, password, onSuccess) => {
+  send(
+    '/users/authentications/create',
+    {
+      username: username,
+      password: password,
+    },
+    onSuccess
+  )
+}
+
