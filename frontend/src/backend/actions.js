@@ -36,3 +36,15 @@ export const thingCreate = ({dispatch, state}, name, description) => {
     }
   )
 }
+
+export const userCreate = ({dispatch, state}, username, password, onSuccess) => {
+  send(
+    '/users/create',
+    {
+      username: username,
+      password: password,
+    },
+    onSuccess
+  )
+}
+

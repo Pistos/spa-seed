@@ -1,3 +1,5 @@
+require 'project-name/websocket/handler/null'
 require 'project-name/websocket/handler/things/list'
 require 'project-name/websocket/handler/things/create'
-require 'project-name/websocket-handler/users/authentications/create'
+require 'project-name/websocket/handler/users/create'
+require 'project-name/websocket/handler/users/authentications/create'

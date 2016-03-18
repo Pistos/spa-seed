@@ -35,40 +35,4 @@ class API < Grape::API
       end
     end
   end
-
-  resource 'users' do
-    desc "Sign up as a new user"
-    params do
-      requires 'username', type: String
-      requires 'password', type: String
-    end
-    post do
-      Model::User.create_with_creds(
-        username: params['username'],
-        plaintext_password: params['password']
-      )
-
-      {'success' => true}
-    end
-
-    resource 'authentications' do
-      desc "Sign in"
-      params do
-        requires 'username', type: String
-        requires 'password', type: String
-      end
-      post do
-        user = Model::User.find_by_creds(
-          username: params['username'],
-          plaintext_password: params['password']
-        )
-        if user
-          payload = { 'user_id' => user.id }
-          { 'jwt' => JWT.encode(payload, $conf['jwt_secret']) }
-        else
-          error!('404 No user found', 404)
-        end
-      end
-    end
-  end
 end

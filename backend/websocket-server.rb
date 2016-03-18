@@ -3,6 +3,8 @@ require 'em-websocket'
 require 'project-name/websocket/message-handler'
 
 EM.run do
+  puts "Websocket server started"
+
   EM::WebSocket.run(host: "0.0.0.0", port: 8081) do |ws|
     ws.onopen do |handshake|
       puts "Websocket open"

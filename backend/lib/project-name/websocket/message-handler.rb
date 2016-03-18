@@ -26,18 +26,25 @@ module ProjectName
 
       def message_handler
         case @message
+        when '/users/create'
+          Websocket::Handler::Users::Create.new(
+            username: @args['username'].to_s,
+            password: @args['password'].to_s
+          )
         when '/users/authentications/create'
           Websocket::Handler::Users::Authentications::Create.new(
-            username: @args['username'],
-            password: @args['password']
+            username: @args['username'].to_s,
+            password: @args['password'].to_s
           )
         when '/things'
           Websocket::Handler::Things::List.new
         when '/things/create'
           Websocket::Handler::Things::Create.new(
-            name: @args['name'],
-            description: @args['description']
+            name: @args['name'].to_s,
+            description: @args['description'].to_s
           )
+        else
+          Websocket::Handler::Null.new
         end
       end
     end

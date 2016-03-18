@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import backend from '../backend'
+
 export default {
   data () {
     return {
@@ -28,27 +30,13 @@ export default {
   },
   methods: {
     submit: function (ev) {
-      // let resource = this.$resource('http://'+window.location.hostname+':8082/api/users')
-
-      let data = {
-        username: this.username,
-        password: this.password,
-      }
-
-      // resource.save(data).then(
-      this.$http.jsonp(
-        'http://'+window.location.hostname+':8082/api/users',
-        data,
-        {
-          method: 'POST',
-        }
-      ).then(
+      let self = this
+      backend.actions.userCreate(
+        this.username,
+        this.password,
         function (response) {
           console.log('Sign up successful')
-          this.$router.go('/sign-in')
-        },
-        function (response) {
-          console.log('Sign up error')
+          self.$router.go('/sign-in')
         }
       )
     },
