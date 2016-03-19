@@ -6,6 +6,11 @@ require 'project-name/websocket/handlers'
 module ProjectName
   module Websocket
     class MessageHandler
+      UNAUTHENTICATED_MESSAGES = [
+        '/users/create',
+        '/users/authentications/create',
+      ]
+
       def initialize(websocket:, json_payload:)
         @ws = websocket
 
@@ -16,12 +21,40 @@ module ProjectName
       end
 
       def handle
+        if ! UNAUTHENTICATED_MESSAGES.include?(@message) && ! authenticated?
+          response = { 'error' => 'Unauthorized' }
+        else
+          response = message_handler.respond
+        end
+
         @ws.send(
           {
             'id' => @id,
-            'response' => message_handler.respond
+            'response' => response
           }.to_json
         )
+      end
+
+      private
+
+      def current_user
+        return @current_user  if @current_user
+
+        begin
+          jwt_payload = JWT.decode(
+            @args['jwt'].to_s,
+            $conf['jwt_secret']
+          )
+          if jwt_payload
+            @current_user = Model::User[id: jwt_payload[0]['user_id'].to_i]
+          end
+        rescue JWT::DecodeError
+          nil
+        end
+      end
+
+      def authenticated?
+        current_user
       end
 
       def message_handler

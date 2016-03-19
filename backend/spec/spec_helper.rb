@@ -23,3 +23,9 @@ RSpec.configure do |config|
     end
   end
 end
+
+RSpec::Matchers.define :json_hash do |hash|
+  match { |actual|
+    JSON.parse(actual) == hash
+  }
+end

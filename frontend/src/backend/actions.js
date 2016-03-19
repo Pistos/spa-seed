@@ -1,9 +1,10 @@
-/* import JwtInterface from '../JwtInterface' */
+import JwtInterface from '../JwtInterface'
 import Websocket from '../Websocket'
 import WebsocketDispatcher from '../WebsocketDispatcher'
 
 function send (message, args, responseHandler) {
   let id = WebsocketDispatcher.addResponseHandler(responseHandler)
+  args.jwt = JwtInterface.getters.jwt()
 
   Websocket.transmit(
     JSON.stringify({
