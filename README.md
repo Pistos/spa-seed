@@ -1,16 +1,17 @@
 # SPA Seed
 
-This is seed code for a single-page web application.  Use it as an example, or
-a basis for a full SPA of your own.
+This is seed code for a single-page web application.  Use it as an example to
+learn from, or a basis for a full SPA of your own.
 
 ## Features
 
 * Both frontend (client-side / browser) and backend (server-side)
 * Authentication using JSON Web Tokens ([JWT](http://jwt.io/))
+* Two-way, asynchronous frontend-backend communication (server can push)
 
 ## Backend
 
-A REST API served by [Grape](https://github.com/ruby-grape/grape).
+Two-way communication with frontend via websockets.
 Data persistence managed by [Sequel](http://sequel.jeremyevans.net/), stored in
 [PostgreSQL](http://www.postgresql.org/).
 
@@ -20,7 +21,7 @@ Data persistence managed by [Sequel](http://sequel.jeremyevans.net/), stored in
 * [PostgreSQL](http://www.postgresql.org/)
 
 It is highly recommended to configure PostgreSQL to allow passwordless local
-connections, for convenience sake.  This is not strictly required, but then
+connections, for convenience's sake.  This is not strictly required, but then
 the burden of making DB authentication work properly becomes yours.
 
 ### Setup
@@ -34,8 +35,9 @@ the burden of making DB authentication work properly becomes yours.
     ${EDITOR} config.yaml
     # Create gemsets, etc. at this point if desired, then:
     bundle install
-    ./migrate.sh
-    PROJECT_NAME_ENV=test ./migrate.sh
+    bin/migrate.sh
+    PROJECT_NAME_ENV=test bin/migrate.sh
+    bin/run-tests.sh
 ```
 
 If desired, rename all instances of /project.?name/i throughout the code to
@@ -43,17 +45,18 @@ whatever you want.
 
 ### Usage
 
-Then start the server with:
+Start the server with:
 
 ``` bash
     ./start-server.sh
 ```
 
-Stop the server with SIGINT (Ctrl-C).
+Stop the server with SIGINT (Ctrl-C), SIGTERM or SIGKILL.
 
 ## Frontend
 
-A Single-Page Application (SPA) built with [Vue.js](http://vuejs.org/).
+A Single-Page Application (SPA) built with [Vue.js](http://vuejs.org/) and
+websockets.
 
 ### Requirements
 
@@ -75,3 +78,36 @@ Serve for development with hot reload at localhost:8080 :
 Build for production with minification:
 
     npm run build
+
+This builds the code into the `dist/` dir.  See Production Config Examples,
+below.
+
+## Production Config Examples
+
+### Nginx
+
+    server {
+      listen 80;
+      server_name yourdomain.com;
+      root /path/to/spa-seed/frontend/dist;
+
+      access_log /var/log/nginx/yourdomain.com.access_log main;
+      error_log /var/log/nginx/yourdomain.com.error_log info;
+    }
+
+### Apache
+
+    <VirtualHost *:80>
+        ServerName yourdomain.com
+        ServerAlias yourdomain.com
+        ErrorLog /var/log/apache2/yourdomain.com.errors
+        CustomLog /var/log/apache2/yourdomain.com.log combined
+        DocumentRoot "/misc/git/spa-seed/frontend/dist"
+
+        <Directory "/path/to/spa-seed/frontend/dist">
+            Options Indexes FollowSymLinks -ExecCGI
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+        </Directory>
+    </VirtualHost>

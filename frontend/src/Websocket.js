@@ -7,7 +7,6 @@ if( ! window.websocket ) {
   let protocol = 'ws://'
   let host = window.location.hostname
   let websocketPort = 8081
-  /* let websocketPath = '/ws' */
   let websocketPath = ''
 
   if( 'MozWebSocket' in window ) {
