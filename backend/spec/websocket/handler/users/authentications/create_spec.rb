@@ -4,6 +4,8 @@ require 'project-name/websocket/handler/users/authentications/create'
 describe ProjectName::Websocket::Handler::Users::Authentications::Create do
   subject(:handler) {
     ProjectName::Websocket::Handler::Users::Authentications::Create.new(
+      websocket: double("Websocket", send: nil),
+      id: 1,
       username: username_arg,
       password: password_arg
     )
@@ -32,7 +34,7 @@ describe ProjectName::Websocket::Handler::Users::Authentications::Create do
           let(:password_arg) { password }
 
           it 'does NOT provide a user authentication token' do
-            response = handler.respond
+            response = handler.response
             expect(response['jwt']).to be_nil
             expect(response['error']).to eq 'No user found'
           end
@@ -42,7 +44,7 @@ describe ProjectName::Websocket::Handler::Users::Authentications::Create do
           let(:password_arg) { 'wrongPassword' }
 
           it 'does NOT provide a user authentication token' do
-            response = handler.respond
+            response = handler.response
             expect(response['jwt']).to be_nil
             expect(response['error']).to eq 'No user found'
           end
@@ -56,7 +58,7 @@ describe ProjectName::Websocket::Handler::Users::Authentications::Create do
           let(:password_arg) { password }
 
           it 'provides a user authentication token' do
-            response = handler.respond
+            response = handler.response
             expect(response['jwt']).not_to be_nil
           end
         end
@@ -65,13 +67,12 @@ describe ProjectName::Websocket::Handler::Users::Authentications::Create do
           let(:password_arg) { 'wrongPassword' }
 
           it 'does NOT provide a user authentication token' do
-            response = handler.respond
+            response = handler.response
             expect(response['jwt']).to be_nil
             expect(response['error']).to eq 'No user found'
           end
         end
       end
-
     end
   end
 end

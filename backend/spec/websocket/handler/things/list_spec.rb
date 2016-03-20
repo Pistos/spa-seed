@@ -3,7 +3,10 @@ require 'project-name/websocket/handler/things/list'
 
 describe ProjectName::Websocket::Handler::Things::List do
   subject(:handler) {
-    ProjectName::Websocket::Handler::Things::List.new
+    ProjectName::Websocket::Handler::Things::List.new(
+      websocket: double("Websocket", send: nil),
+      id: 1
+    )
   }
 
   context 'given some things' do
@@ -14,7 +17,7 @@ describe ProjectName::Websocket::Handler::Things::List do
 
     describe '#respond' do
       it 'returns all the things' do
-        response = handler.respond
+        response = handler.response
 
         expect(response.count).to eq 2
         expect(response[1]['name']).to eq 'thing2'

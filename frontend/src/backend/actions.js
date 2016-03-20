@@ -32,10 +32,12 @@ export const thingCreate = ({dispatch, state}, name, description) => {
       name: name,
       description: description,
     },
-    function (response) {
-      dispatch('THING_CREATE', response)
-    }
+    function (response) { }
   )
+}
+
+export const dispatchThingCreate = ({dispatch, state}, response) => {
+  dispatch('THING_CREATE', response)
 }
 
 export const userCreate = ({dispatch, state}, username, password, onSuccess) => {

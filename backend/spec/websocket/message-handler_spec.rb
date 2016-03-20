@@ -1,13 +1,17 @@
 require 'spec_helper'
+require 'project-name/null-logger'
 require 'project-name/websocket/message-handler'
 
 describe ProjectName::Websocket::MessageHandler do
+  let(:broadcaster) { double("Broadcaster", broadcast: nil) }
   let(:websocket) { double("Websocket", send: nil) }
   let(:json_payload) { payload.to_json }
   let(:handler) {
     ProjectName::Websocket::MessageHandler.new(
+      broadcaster: broadcaster,
       websocket: websocket,
-      json_payload: json_payload
+      json_payload: json_payload,
+      logger: ProjectName::NullLogger.new
     )
   }
   let(:specific_handler) { nil }

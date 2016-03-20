@@ -1,15 +1,20 @@
 require 'project-name/model'
+require 'project-name/websocket/handler/broadcasting'
 
 module ProjectName
   module Websocket
     module Handler
       module Things
-        class Create
-          def initialize(name:, description:)
+        class Create < Handler::Broadcasting
+          def initialize_more(name:, description:)
             @name, @description = name, description
           end
 
-          def respond
+          def message
+            '/things/create'
+          end
+
+          def response
             Model::Thing.create(
               name: @name,
               description: @description

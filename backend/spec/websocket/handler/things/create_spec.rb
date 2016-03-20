@@ -4,15 +4,22 @@ require 'project-name/websocket/handler/things/create'
 describe ProjectName::Websocket::Handler::Things::Create do
   subject(:handler) {
     ProjectName::Websocket::Handler::Things::Create.new(
+      broadcaster: double("Broadcaster", broadcast: nil),
       name: 'New Thing',
       description: 'New Thing description'
     )
   }
 
+  describe '#message' do
+    it 'is /things/create' do
+      expect(handler.message).to eq '/things/create'
+    end
+  end
+
   describe '#respond' do
     it 'creates a thing' do
       expect {
-        handler.respond
+        handler.response
       }.to change {
         ProjectName::Model::Thing.count
       }.by(1)

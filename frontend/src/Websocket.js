@@ -21,7 +21,7 @@ if( ! window.websocket ) {
 
   window.websocket.onmessage = function (e) {
     let data = JSON.parse(e.data)
-    WebsocketDispatcher.dispatch( data.id, data.response )
+    WebsocketDispatcher.dispatch(data)
   }
 
   window.websocket.waitForWebsocketReady = function (callback, interval) {

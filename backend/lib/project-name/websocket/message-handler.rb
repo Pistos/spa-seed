@@ -11,28 +11,31 @@ module ProjectName
         '/users/authentications/create',
       ]
 
-      def initialize(websocket:, json_payload:)
-        @ws = websocket
+      def initialize(broadcaster:, websocket:, json_payload:, logger: $stdout)
+        @broadcaster, @websocket = broadcaster, websocket
 
         payload = JSON.parse(json_payload)
-        puts "Handling message: \n#{payload.inspect}"
+        logger.puts "Handling message: \n#{payload.inspect}"
 
         @id, @message, @args = payload['id'], payload['message'], payload['args']
       end
 
       def handle
         if ! UNAUTHENTICATED_MESSAGES.include?(@message) && ! authenticated?
-          response = { 'error' => 'Unauthorized' }
+          # TODO: What about authenticated broadcast handling?
+          # (This is responding like a direct handler)
+          # So maybe this error stuff belongs in the individual handlers.
+          # Ruby module or something.
+          # Or composition?  Authenticator class?
+          @websocket.send(
+            {
+              'id' => @id,
+              'response' => { 'error' => 'Unauthorized' }
+            }.to_json
+          )
         else
-          response = message_handler.respond
+          message_handler.respond
         end
-
-        @ws.send(
-          {
-            'id' => @id,
-            'response' => response
-          }.to_json
-        )
       end
 
       private
@@ -61,18 +64,26 @@ module ProjectName
         case @message
         when '/users/create'
           Websocket::Handler::Users::Create.new(
+            websocket: @websocket,
+            id: @id,
             username: @args['username'].to_s,
             password: @args['password'].to_s
           )
         when '/users/authentications/create'
           Websocket::Handler::Users::Authentications::Create.new(
+            websocket: @websocket,
+            id: @id,
             username: @args['username'].to_s,
             password: @args['password'].to_s
           )
         when '/things'
-          Websocket::Handler::Things::List.new
+          Websocket::Handler::Things::List.new(
+            websocket: @websocket,
+            id: @id
+          )
         when '/things/create'
           Websocket::Handler::Things::Create.new(
+            broadcaster: @broadcaster,
             name: @args['name'].to_s,
             description: @args['description'].to_s
           )
