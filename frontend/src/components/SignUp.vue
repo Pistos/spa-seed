@@ -8,7 +8,7 @@
       </tr>
       <tr>
         <td><label for="password">Password</label></td>
-        <td><input type="text" name="password" v-model="password" placeholder="password"/></td>
+        <td><input type="password" name="password" v-model="password" placeholder="password"/></td>
       </tr>
       <tr>
         <td></td>
