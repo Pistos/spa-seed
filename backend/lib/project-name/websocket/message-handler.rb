@@ -21,7 +21,7 @@ module ProjectName
       end
 
       def handle
-        if ! UNAUTHENTICATED_MESSAGES.include?(@message) && ! authenticated?
+        if ! UNAUTHENTICATED_MESSAGES.include?(@message) && ! @websocket.authenticated?
           # TODO: What about authenticated broadcast handling?
           # (This is responding like a direct handler)
           # So maybe this error stuff belongs in the individual handlers.
@@ -39,26 +39,6 @@ module ProjectName
       end
 
       private
-
-      def current_user
-        return @current_user  if @current_user
-
-        begin
-          jwt_payload = JWT.decode(
-            @args['jwt'].to_s,
-            $conf['jwt_secret']
-          )
-          if jwt_payload
-            @current_user = Model::User[id: jwt_payload[0]['user_id'].to_i]
-          end
-        rescue JWT::DecodeError
-          nil
-        end
-      end
-
-      def authenticated?
-        current_user
-      end
 
       def message_handler
         case @message

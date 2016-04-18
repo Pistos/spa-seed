@@ -4,11 +4,11 @@ import WebsocketDispatcher from '../WebsocketDispatcher'
 
 function send (message, args, responseHandler) {
   let id = WebsocketDispatcher.addResponseHandler(responseHandler)
-  args.jwt = JwtInterface.getters.jwt()
 
   Websocket.transmit(
     JSON.stringify({
       id: id,
+      jwt: JwtInterface.getters.jwt(),
       message: message,
       args: args,
     })

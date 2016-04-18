@@ -1,10 +1,11 @@
 require 'project-name/null-logger'
+require 'project-name/websocket/authenticatable-websocket-set'
 require 'project-name/websocket/message-handler'
 
 module ProjectName
   class WebsocketServer
     def initialize
-      @websockets = []
+      @auth_websockets = Websocket::AuthenticatableWebsocketSet.new
       @logger = $stdout
       @logger_error = $stderr
     end
@@ -12,19 +13,21 @@ module ProjectName
     def run(ws)
       ws.onopen do |handshake|
         @logger.puts "Websocket open"
-        @websockets << ws
+        @auth_websockets << ws
       end
 
       ws.onclose do
-        @websockets.delete ws
+        @auth_websockets.delete ws
         @logger.puts "Websocket closed!"
       end
 
       ws.onmessage do |json_payload|
         begin
+          aws = @auth_websockets[ws]
+          aws.authenticate(json_payload)
           handler = ProjectName::Websocket::MessageHandler.new(
             broadcaster: self,
-            websocket: ws,
+            websocket: aws,
             json_payload: json_payload,
             logger: @logger
           )
@@ -40,7 +43,7 @@ module ProjectName
     end
 
     def broadcast(payload)
-      @websockets.each do |ws|
+      @auth_websockets.each do |ws|
         ws.send payload
       end
     end
