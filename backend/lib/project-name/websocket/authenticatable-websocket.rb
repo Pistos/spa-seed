@@ -20,7 +20,6 @@ module ProjectName
 
       def authenticate(json_payload)
         payload = JSON.parse(json_payload)
-        # TODO: Frontend needs to change to put 'jwt' element at top level
         jwt = payload['jwt'].to_s
 
         begin
