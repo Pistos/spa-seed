@@ -1,10 +1,12 @@
 require 'project-name/config'
 require 'project-name/model'
 
-require 'pry'
-require 'factory_girl'
-require 'factories'
 require 'database_cleaner'
+require 'factory_girl'
+require 'pry'
+
+require 'factories'
+require 'spec-helpers'
 
 # So that FactoryGirl can be used with Sequel
 class Sequel::Model
@@ -12,6 +14,8 @@ class Sequel::Model
 end
 
 RSpec.configure do |config|
+  config.include SpecHelpers
+
   config.before(:suite) do
     DatabaseCleaner.start
     DatabaseCleaner.clean

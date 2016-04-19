@@ -4,6 +4,8 @@ require 'project-name/websocket/message-handler'
 
 module ProjectName
   class WebsocketServer
+    attr_reader :auth_websockets
+
     def initialize
       @auth_websockets = Websocket::AuthenticatableWebsocketSet.new
       @logger = $stdout
@@ -45,6 +47,14 @@ module ProjectName
     def broadcast(payload)
       @auth_websockets.each do |ws|
         ws.send payload
+      end
+    end
+
+    def broadcast_to_user(user:, payload:)
+      @auth_websockets.each do |ws|
+        if ws.user == user
+          ws.send payload
+        end
       end
     end
   end
