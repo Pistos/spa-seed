@@ -48,7 +48,7 @@ whatever you want.
 Start the server with:
 
 ``` bash
-    ./start-server.sh
+    bin/start-server.sh
 ```
 
 Stop the server with SIGINT (Ctrl-C), SIGTERM or SIGKILL.
