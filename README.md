@@ -9,6 +9,19 @@ learn from, or a basis for a full SPA of your own.
 * Authentication using JSON Web Tokens ([JWT](http://jwt.io/))
 * Two-way, asynchronous frontend-backend communication (server can push)
 
+## Setup
+
+Put your project's name throughout the repository:
+
+``` bash
+    cd /path/to/spa-seed
+    find backend -type f -exec sed -i 's/ProjectName/YourActualProjectName/g' {} +
+    find backend -type f -exec sed -i 's/project-name/your-actual-project-name/g' {} +
+    find backend -type f -exec sed -i 's/PROJECT_NAME/YOUR_ACTUAL_PROJECT_NAME/g' {} +
+    git mv backend/lib/project-name backend/lib/your-actual-project-name
+    find frontend -type f -exec sed -i 's/ProjectName/YourActualProjectName/g' {} +
+```
+
 ## Backend
 
 Two-way communication with frontend via websockets.
@@ -39,9 +52,6 @@ the burden of making DB authentication work properly becomes yours.
     PROJECT_NAME_ENV=test bin/migrate.sh
     bin/run-tests.sh
 ```
-
-If desired, rename all instances of /project.?name/i throughout the code to
-whatever you want.
 
 ### Usage
 
