@@ -30,10 +30,12 @@ app.use(devMiddleware)
 // compilation error display
 app.use(hotMiddleware)
 
-app.listen(8080, function (err) {
+/* var port = 8080; */
+var port = 3010;
+app.listen(port, function (err) {
   if (err) {
     console.log(err)
     return
   }
-  console.log('Listening at http://localhost:8080')
+  console.log('Listening at http://localhost:'+port)
 })
