@@ -4,6 +4,7 @@ development:
     database: "spa_seed"
     username: "spa_seed"
     password: "spa_seed"
+    num_connections: 40
   jwt_secret: ""
 test:
   db:
@@ -11,4 +12,5 @@ test:
     database: "spa_seed_test"
     username: "spa_seed"
     password: "spa_seed"
+    num_connections: 40
   jwt_secret: "test jwt secret"
