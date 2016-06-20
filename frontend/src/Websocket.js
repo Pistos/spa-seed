@@ -13,6 +13,8 @@ if( ! window.websocket ) {
     window.websocket = new MozWebSocket(protocol + host + ':' + websocketPort + websocketPath)
   } else if( 'WebSocket' in window ) {
     window.websocket = new WebSocket(protocol + host + ':' + websocketPort + websocketPath)
+  } else {
+    alert('Your browser does not seem to support websockets, which are required by this application.')
   }
 
   window.websocket.onopen = function (e) {
