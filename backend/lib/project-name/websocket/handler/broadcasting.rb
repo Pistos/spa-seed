@@ -23,6 +23,7 @@ module ProjectName
           @broadcaster.broadcast(
             {
               'message' => message,
+              # 'args'?
               'response' => response,
             }.to_json
           )

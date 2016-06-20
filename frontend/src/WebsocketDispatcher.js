@@ -5,8 +5,8 @@ if( ! window.websocketDispatcher ) {
     currentId: 0,
     handlers: {
       '/things/create': [
-        function (response) {
-          backend.actions.dispatchThingCreate(response)
+        function (args) {
+          backend.actions.dispatchThingCreate(args)
         },
       ],
     },
@@ -31,7 +31,10 @@ if( ! window.websocketDispatcher ) {
         delete this.handlers[data.id]
       } else if( data.message ) {
         this.handlers[data.message].forEach( function (handler, i) {
-          handler.call(this, data.response)
+          if( data.response ) {
+            console.log('WARNING: found data.response when looking for data.args (message: '+data.message+')')
+          }
+          handler.call(this, data.args)
         } )
       }
     },

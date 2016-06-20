@@ -24,12 +24,15 @@ module ProjectName
 
       case event.operation
       when 'insert'
-        require 'pry-byebug'; debugger
         record = model[event.payload.to_i]
         if record.visible_to?(user: @user)
+          payload = {
+            'message' => '/things/create',
+            'args' => record.to_serializable,
+          }.to_json
           @event_receiver.broadcast_to_user(
             user: @user,
-            payload: record.to_serializable.to_json
+            payload: payload
           )
         end
       # when 'update'
