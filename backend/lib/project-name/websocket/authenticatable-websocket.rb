@@ -45,7 +45,7 @@ module ProjectName
       end
 
       def user
-        @user || Model::NilUser
+        @user || Model::NilUser.new
       end
     end
   end
