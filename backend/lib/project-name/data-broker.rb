@@ -25,7 +25,7 @@ module ProjectName
       case event.operation
       when 'insert'
         record = model[event.payload.to_i]
-        if record.visible_to?(user: @user)
+        if record && record.visible_to?(user: @user)
           payload = {
             'message' => '/things/create',
             'args' => record.to_serializable,
