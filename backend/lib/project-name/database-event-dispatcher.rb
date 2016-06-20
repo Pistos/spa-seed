@@ -13,6 +13,12 @@ module ProjectName
 
     def initialize
       @subscribers = Set.new
+
+      ProjectName::Database.tables.map { |table|
+        OPERATIONS.map { |operation|
+          create_listener_thread(table: table, operation: operation)
+        }
+      }.flatten
     end
 
     def subscribe(subscriber:)
@@ -21,14 +27,6 @@ module ProjectName
 
     def unsubscribe(subscriber:)
       @subscribers.delete subscriber
-    end
-
-    def listen
-      ProjectName::Database.tables.map { |table|
-        OPERATIONS.map { |operation|
-          create_listener_thread(table: table, operation: operation)
-        }
-      }.flatten
     end
 
     private
