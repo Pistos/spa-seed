@@ -1,6 +1,8 @@
 require 'json'
 require 'jwt'
 
+require 'project-name/model'
+
 module ProjectName
   module Websocket
     def self.AuthenticatableWebsocket(websocket)
@@ -12,7 +14,7 @@ module ProjectName
     end
 
     class AuthenticatableWebsocket
-      attr_reader :user, :websocket
+      attr_reader :websocket
 
       def initialize(websocket:)
         @websocket = websocket
@@ -40,6 +42,10 @@ module ProjectName
 
       def authenticated?
         @user
+      end
+
+      def user
+        @user || Model::NilUser
       end
     end
   end
