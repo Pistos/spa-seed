@@ -23,6 +23,13 @@ module ProjectName
         user = Model::User[username: username]
         user  if user && user.password == plaintext_password
       end
+
+      def new_data_broker(event_receiver)
+        DataBroker.new(
+          user: self,
+          event_receiver: event_receiver
+        )
+      end
     end
   end
 end

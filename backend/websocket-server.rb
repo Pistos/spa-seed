@@ -2,6 +2,8 @@ require 'em-websocket'
 
 require 'project-name/websocket-server'
 
+Thread.abort_on_exception = true
+
 EventMachine.run do
   puts "Websocket server started"
 

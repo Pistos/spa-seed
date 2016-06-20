@@ -1,3 +1,5 @@
+require 'project-name/database-event-dispatcher'
+require 'project-name/data-broker-set'
 require 'project-name/null-logger'
 require 'project-name/websocket/authenticatable-websocket-set'
 require 'project-name/websocket/message-handler'
@@ -8,6 +10,7 @@ module ProjectName
 
     def initialize
       @auth_websockets = Websocket::AuthenticatableWebsocketSet.new
+      @data_brokers = DataBrokerSet.new(event_receiver: self)
       @logger = $stdout
       @logger_error = $stderr
     end
@@ -19,7 +22,8 @@ module ProjectName
       end
 
       ws.onclose do
-        @auth_websockets.delete ws
+        nil_or_user_with_no_more_sockets = @auth_websockets.delete(ws)
+        @data_brokers.deregister user: nil_or_user_with_no_more_sockets
         @logger.puts "Websocket closed!"
       end
 
@@ -27,6 +31,7 @@ module ProjectName
         begin
           aws = @auth_websockets[ws]
           aws.authenticate(json_payload)
+          @data_brokers.register user: aws.user
           handler = ProjectName::Websocket::MessageHandler.new(
             broadcaster: self,
             websocket: aws,

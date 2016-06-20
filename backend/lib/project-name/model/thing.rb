@@ -8,6 +8,10 @@ module ProjectName
           'description' => self.description,
         }
       end
+
+      def visible_to?(user:)
+        true
+      end
     end
   end
 end

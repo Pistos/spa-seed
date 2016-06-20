@@ -12,7 +12,14 @@ module ProjectName
       end
 
       def delete(websocket)
-        @set.delete self[websocket]
+        aws = self[websocket]
+        user = aws.user
+
+        @set.delete aws
+
+        if no_more_sockets_for_user?(user)
+          user
+        end
       end
 
       def each(*args, &block)
@@ -21,6 +28,14 @@ module ProjectName
 
       def [](websocket)
         @set.find { |aws| aws == websocket || aws.websocket == websocket }
+      end
+
+      private
+
+      def no_more_sockets_for_user?(user)
+        @set.none? { |aws|
+          aws.user == user
+        }
       end
     end
   end
