@@ -1,3 +1,8 @@
+if ENV['PROJECT_NAME_ENV'] != 'test' && ! ENV['PROJECT_NAME_ENV_FORCE']
+  $stderr.puts 'PROJECT_NAME_ENV is not "test".  Set PROJECT_NAME_ENV_FORCE to run tests anyway.'
+  exit 1
+end
+
 require 'project-name/config'
 require 'project-name/model'
 
