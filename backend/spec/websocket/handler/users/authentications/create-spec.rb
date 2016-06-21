@@ -5,7 +5,7 @@ describe ProjectName::Websocket::Handler::Users::Authentications::Create do
   subject(:handler) {
     ProjectName::Websocket::Handler::Users::Authentications::Create.new(
       websocket: double("Websocket", send: nil),
-      id: 1,
+      websocket_message_id: 1,
       username: username_arg,
       password: password_arg
     )

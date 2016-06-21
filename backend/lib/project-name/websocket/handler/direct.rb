@@ -4,9 +4,8 @@ module ProjectName
   module Websocket
     module Handler
       class Direct
-        # TODO: Rename id to something more descriptive?
-        def initialize(websocket:, id:, **args)
-          @websocket, @id = websocket, id
+        def initialize(websocket:, websocket_message_id:, **args)
+          @websocket, @websocket_message_id = websocket, websocket_message_id
           initialize_more(**args)
         end
 
@@ -21,7 +20,7 @@ module ProjectName
         def respond
           @websocket.send(
             {
-              'id' => @id,
+              'id' => @websocket_message_id,
               'response' => response,
             }.to_json
           )

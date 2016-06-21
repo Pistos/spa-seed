@@ -5,7 +5,7 @@ describe ProjectName::Websocket::Handler::Things::List do
   subject(:handler) {
     ProjectName::Websocket::Handler::Things::List.new(
       websocket: double("Websocket", send: nil),
-      id: 1
+      websocket_message_id: 1
     )
   }
 

@@ -45,32 +45,33 @@ module ProjectName
         when '/users/create'
           Websocket::Handler::Users::Create.new(
             websocket: @websocket,
-            id: @id,
+            websocket_message_id: @id,
             username: @args['username'].to_s,
             password: @args['password'].to_s
           )
         when '/users/authentications/create'
           Websocket::Handler::Users::Authentications::Create.new(
             websocket: @websocket,
-            id: @id,
+            websocket_message_id: @id,
             username: @args['username'].to_s,
             password: @args['password'].to_s
           )
         when '/things'
           Websocket::Handler::Things::List.new(
             websocket: @websocket,
-            id: @id
+            websocket_message_id: @id
           )
         when '/things/create'
           Websocket::Handler::Things::Create.new(
             websocket: @websocket,
-            id: @id,
+            websocket_message_id: @id,
             name: @args['name'].to_s,
             description: @args['description'].to_s
           )
         when '/things/delete'
           Websocket::Handler::Things::Delete.new(
             websocket: @websocket,
+            websocket_message_id: @id,
             id: @args['id'].to_i
           )
         else

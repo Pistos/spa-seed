@@ -11,7 +11,7 @@ describe ProjectName::Websocket::Handler::Things::Create do
       expect {
         ProjectName::Websocket::Handler::Things::Create.new(
           websocket: double("Websocket", send: nil),
-          id: 1,
+          websocket_message_id: 1,
           name: name,
           description: description
         )
