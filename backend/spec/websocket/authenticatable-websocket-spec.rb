@@ -61,9 +61,10 @@ describe ProjectName::Websocket::AuthenticatableWebsocket do
         }
 
         it 'sets the user' do
+          expect(aws.user).to be_a(ProjectName::Model::NilUser)
           expect {
             aws.authenticate(json_payload)
-          }.to change { aws.user }.from(ProjectName::Model::NilUser).to(user)
+          }.to change { aws.user }.to(user)
         end
       end
 
@@ -71,9 +72,10 @@ describe ProjectName::Websocket::AuthenticatableWebsocket do
         let(:jwt) { 'attempted JWT spoof' }
 
         it 'does not set the user' do
+          expect(aws.user).to be_a(ProjectName::Model::NilUser)
           expect {
             aws.authenticate(json_payload)
-          }.not_to change { aws.user }.from(ProjectName::Model::NilUser)
+          }.not_to change { aws.user }
         end
       end
     end

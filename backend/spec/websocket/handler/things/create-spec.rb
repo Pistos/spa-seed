@@ -11,8 +11,8 @@ describe ProjectName::Websocket::Handler::Things::Create do
   }
 
   describe '#message' do
-    it 'is /things/create' do
-      expect(handler.message).to eq '/things/create'
+    it 'is nil' do
+      expect(handler.message).to be_nil
     end
   end
 
