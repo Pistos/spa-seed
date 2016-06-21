@@ -2,27 +2,26 @@ require 'spec_helper'
 require 'project-name/websocket/handler/things/create'
 
 describe ProjectName::Websocket::Handler::Things::Create do
-  subject(:handler) {
-    ProjectName::Websocket::Handler::Things::Create.new(
-      broadcaster: double("Broadcaster", broadcast: nil),
-      name: 'New Thing',
-      description: 'New Thing description'
-    )
-  }
 
-  describe '#message' do
-    it 'is nil' do
-      expect(handler.message).to be_nil
-    end
-  end
+  describe '#new' do
+    let(:name) { 'New Thing' }
+    let(:description) { 'New Thing description' }
 
-  describe '#respond' do
     it 'creates a thing' do
       expect {
-        handler.response
+        ProjectName::Websocket::Handler::Things::Create.new(
+          websocket: double("Websocket", send: nil),
+          id: 1,
+          name: name,
+          description: description
+        )
       }.to change {
         ProjectName::Model::Thing.count
-      }.by(1)
+      }.from(0).to(1)
+
+      new_thing = ProjectName::Model::Thing.last
+      expect(new_thing.name).to eq name
+      expect(new_thing.description).to eq description
     end
   end
 end

@@ -63,13 +63,14 @@ module ProjectName
           )
         when '/things/create'
           Websocket::Handler::Things::Create.new(
-            broadcaster: @broadcaster,
+            websocket: @websocket,
+            id: @id,
             name: @args['name'].to_s,
             description: @args['description'].to_s
           )
         when '/things/delete'
           Websocket::Handler::Things::Delete.new(
-            broadcaster: @broadcaster,
+            websocket: @websocket,
             id: @args['id'].to_i
           )
         else

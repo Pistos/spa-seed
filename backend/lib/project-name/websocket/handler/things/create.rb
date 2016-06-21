@@ -5,8 +5,7 @@ module ProjectName
   module Websocket
     module Handler
       module Things
-        # TODO: This should probably be a Handler::Direct
-        class Create < Handler::Broadcasting
+        class Create < Handler::Direct
           def initialize_more(name:, description:)
             Model::Thing.create(
               name: name,
