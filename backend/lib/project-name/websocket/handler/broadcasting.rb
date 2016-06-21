@@ -20,13 +20,15 @@ module ProjectName
         end
 
         def respond
-          @broadcaster.broadcast(
-            {
-              'message' => message,
-              # 'args'?
-              'response' => response,
-            }.to_json
-          )
+          if message && response
+            @broadcaster.broadcast(
+              {
+                'message' => message,
+                # 'args'?
+                'response' => response,
+              }.to_json
+            )
+          end
         end
       end
     end

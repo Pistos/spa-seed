@@ -7,18 +7,10 @@ module ProjectName
       module Things
         class Create < Handler::Broadcasting
           def initialize_more(name:, description:)
-            @name, @description = name, description
-          end
-
-          def message
-            '/things/create'
-          end
-
-          def response
             Model::Thing.create(
-              name: @name,
-              description: @description
-            ).to_serializable
+              name: name,
+              description: description
+            )
           end
         end
       end
