@@ -14,6 +14,11 @@ if( ! window.websocketDispatcher ) {
           backend.actions.dispatchThingUpdate(args)
         },
       ],
+      '/things/delete': [
+        function (args) {
+          backend.actions.dispatchThingDelete(args)
+        },
+      ],
     },
 
     nextId: function () {

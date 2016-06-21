@@ -21,6 +21,7 @@ module ProjectName
       # instead of a case tree
 
       model = MODEL_FOR[event.table]
+      payload = nil
 
       case event.operation
       when 'insert'
@@ -30,10 +31,6 @@ module ProjectName
             'message' => '/things/create',
             'args' => record.to_serializable,
           }.to_json
-          @event_receiver.broadcast_to_user(
-            user: @user,
-            payload: payload
-          )
         end
       when 'update'
         record = model[event.payload.to_i]
@@ -42,12 +39,19 @@ module ProjectName
             'message' => '/things/update',
             'args' => record.to_serializable,
           }.to_json
-          @event_receiver.broadcast_to_user(
-            user: @user,
-            payload: payload
-          )
         end
-      # when 'delete'
+      when 'delete'
+        payload = {
+          'message' => '/things/delete',
+          'args' => {'id' => event.payload.to_i},
+        }.to_json
+      end
+
+      if payload
+        @event_receiver.broadcast_to_user(
+          user: @user,
+          payload: payload
+        )
       end
     end
   end

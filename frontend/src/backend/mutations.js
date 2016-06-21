@@ -15,4 +15,10 @@ export default {
       state.things.$set(thingIndex, updatedThing)
     }
   },
+  [mtypes.THING_DELETE] (state, data) {
+    let deletedThing = state.things.find(
+      function (thing) { return thing.id === data.id }
+    )
+    state.things.$remove(deletedThing)
+  },
 }

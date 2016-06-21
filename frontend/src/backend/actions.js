@@ -46,6 +46,11 @@ export const dispatchThingUpdate = ({dispatch, state}, response) => {
   dispatch('THING_UPDATE', response)
 }
 
+// TODO: change `response` to `args`
+export const dispatchThingDelete = ({dispatch, state}, response) => {
+  dispatch('THING_DELETE', response)
+}
+
 export const userCreate = ({dispatch, state}, username, password, onSuccess) => {
   send(
     '/users/create',
