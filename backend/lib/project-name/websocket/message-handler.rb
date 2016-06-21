@@ -67,6 +67,11 @@ module ProjectName
             name: @args['name'].to_s,
             description: @args['description'].to_s
           )
+        when '/things/delete'
+          Websocket::Handler::Things::Delete.new(
+            broadcaster: @broadcaster,
+            id: @args['id'].to_i
+          )
         else
           Websocket::Handler::Null.new
         end

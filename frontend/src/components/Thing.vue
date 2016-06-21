@@ -6,15 +6,25 @@
   <div>
     <label>Description: <span>{{thing.description}}</span></label>
   </div>
+  <div>
+    <button v-on:click.stop="deleteThis">delete</button>
+  </div>
 </li>
 </template>
 
 <script>
+import backend from '../backend'
+
 export default {
   data () {
     return {}
   },
   props: ['thing'],
+  methods: {
+    deleteThis: function () {
+      backend.thingDelete(this.thing.id)
+    },
+  },
 }
 </script>
 

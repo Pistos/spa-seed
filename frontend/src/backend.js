@@ -39,6 +39,14 @@ export default {
     )
   },
 
+  thingDelete: function (id) {
+    this.send(
+      '/things/delete',
+      { id: id },
+      function (response) { }
+    )
+  },
+
   userCreate: function (username, password, onSuccess) {
     this.send(
       '/users/create',

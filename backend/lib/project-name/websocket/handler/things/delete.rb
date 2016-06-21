@@ -6,12 +6,9 @@ module ProjectName
     module Handler
       module Things
         # TODO: This should probably be a Handler::Direct
-        class Create < Handler::Broadcasting
-          def initialize_more(name:, description:)
-            Model::Thing.create(
-              name: name,
-              description: description
-            )
+        class Delete < Handler::Broadcasting
+          def initialize_more(id:)
+            Model::Thing.where(id: id).destroy
           end
         end
       end
