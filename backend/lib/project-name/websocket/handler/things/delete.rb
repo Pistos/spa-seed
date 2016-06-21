@@ -6,7 +6,7 @@ module ProjectName
     module Handler
       module Things
         # TODO: This should probably be a Handler::Direct
-        class Delete < Handler::Broadcasting
+        class Delete < Handler::Direct
           def initialize_more(id:)
             Model::Thing.where(id: id).destroy
           end
