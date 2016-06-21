@@ -9,6 +9,11 @@ if( ! window.websocketDispatcher ) {
           backend.actions.dispatchThingCreate(args)
         },
       ],
+      '/things/update': [
+        function (args) {
+          backend.actions.dispatchThingUpdate(args)
+        },
+      ],
     },
 
     nextId: function () {

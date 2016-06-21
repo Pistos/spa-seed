@@ -7,4 +7,12 @@ export default {
   [mtypes.THING_CREATE] (state, createdThing) {
     state.things.push(createdThing)
   },
+  [mtypes.THING_UPDATE] (state, updatedThing) {
+    let thingIndex = state.things.findIndex(
+      function (thing) { return thing.id === updatedThing.id }
+    )
+    if( thingIndex > -1 ) {
+      state.things.$set(thingIndex, updatedThing)
+    }
+  },
 }

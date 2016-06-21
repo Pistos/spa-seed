@@ -35,7 +35,18 @@ module ProjectName
             payload: payload
           )
         end
-      # when 'update'
+      when 'update'
+        record = model[event.payload.to_i]
+        if record && record.visible_to?(user: @user)
+          payload = {
+            'message' => '/things/update',
+            'args' => record.to_serializable,
+          }.to_json
+          @event_receiver.broadcast_to_user(
+            user: @user,
+            payload: payload
+          )
+        end
       # when 'delete'
       end
     end
