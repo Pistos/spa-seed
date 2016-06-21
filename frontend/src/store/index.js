@@ -7,7 +7,7 @@ import mutations from './mutations'
 import getters from './getters'
 
 const state = {
-  things: [],  /* TODO: Load from API at this point? */
+  things: [],
 }
 
 export default new Vuex.Store({

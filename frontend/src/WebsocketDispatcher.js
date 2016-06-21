@@ -1,4 +1,4 @@
-import backend from './backend'
+import store from './store'
 
 if( ! window.websocketDispatcher ) {
   window.websocketDispatcher = {
@@ -6,17 +6,17 @@ if( ! window.websocketDispatcher ) {
     handlers: {
       '/things/create': [
         function (args) {
-          backend.actions.dispatchThingCreate(args)
+          store.actions.dispatchThingCreate(args)
         },
       ],
       '/things/update': [
         function (args) {
-          backend.actions.dispatchThingUpdate(args)
+          store.actions.dispatchThingUpdate(args)
         },
       ],
       '/things/delete': [
         function (args) {
-          backend.actions.dispatchThingDelete(args)
+          store.actions.dispatchThingDelete(args)
         },
       ],
     },

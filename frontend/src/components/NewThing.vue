@@ -26,7 +26,7 @@ export default {
     submit: function (ev) {
       ev.preventDefault()
 
-      backend.actions.thingCreate(this.name, this.description)
+      backend.thingCreate(this.name, this.description)
       this.name = null
       this.description = null
       document.querySelector('[name="name"]').focus()

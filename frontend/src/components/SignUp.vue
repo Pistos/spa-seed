@@ -31,7 +31,7 @@ export default {
   methods: {
     submit: function (ev) {
       let self = this
-      backend.actions.userCreate(
+      backend.userCreate(
         this.username,
         this.password,
         function (response) {

@@ -14,6 +14,7 @@
 import Thing from './Thing'
 import NewThing from './NewThing'
 import backend from '../backend'
+import store from '../store'
 
 export default {
   components: {
@@ -21,11 +22,13 @@ export default {
     Thing,
   },
   computed: {
-    things: backend.getters.things,
+    things: store.getters.things,
   },
   route: {
     data: function (transition) {
-      backend.actions.thingsLoad()
+      /* TODO: This data load probably belongs elsewhere, in some
+      earlier global initialization code */
+      backend.thingsLoad()
     },
   },
 }
