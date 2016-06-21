@@ -1,8 +1,9 @@
+require 'project-name/model/base'
 require 'bcrypt'
 
 module ProjectName
   module Model
-    class User < Sequel::Model
+    class User < Model::Base
       def password
         BCrypt::Password.new(self.encrypted_password)
       end

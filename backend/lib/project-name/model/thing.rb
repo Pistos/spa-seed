@@ -1,6 +1,8 @@
+require 'project-name/model/base'
+
 module ProjectName
   module Model
-    class Thing < Sequel::Model
+    class Thing < Model::Base
       def to_serializable
         {
           'id' => self.id,
