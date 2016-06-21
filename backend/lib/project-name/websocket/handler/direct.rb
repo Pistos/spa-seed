@@ -19,12 +19,14 @@ module ProjectName
         end
 
         def respond
-          @websocket.send(
-            {
-              'id' => @id,
-              'response' => response,
-            }.to_json
-          )
+          if response
+            @websocket.send(
+              {
+                'id' => @id,
+                'response' => response,
+              }.to_json
+            )
+          end
         end
       end
     end
