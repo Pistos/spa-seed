@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <!-- /!\ See index.html in root dir.  This id="app" may not be right. -->
+  <div id="app">
     <img class="logo" src="./assets/logo.png">
     <div id="nav">
       <a v-link="{ path: '/sign-in' }" v-if="! jwt">Sign In</a>

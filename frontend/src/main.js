@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-Vue.use(require('vue-resource'))
 Vue.use(require('vue-router'))
 Vue.config.debug = true
 
@@ -18,4 +17,4 @@ router.map({
   '/sign-in': { component: SignIn },
   '/sign-up': { component: SignUp },
 })
-router.start(App, '#app')
+router.start(App, 'app')

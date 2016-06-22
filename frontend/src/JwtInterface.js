@@ -11,6 +11,7 @@ const actions = {
   clear: 'CLEAR',
 }
 
+/*eslint no-useless-computed-key: 0*/
 const mutations = {
   ['SET'] (state, newValue) {
     state.jwt = newValue
