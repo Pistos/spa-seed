@@ -22,6 +22,7 @@ RSpec.configure do |config|
   config.include SpecHelpers
 
   config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start
     DatabaseCleaner.clean
   end
