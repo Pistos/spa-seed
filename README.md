@@ -32,6 +32,7 @@ Data persistence managed by [Sequel](http://sequel.jeremyevans.net/), stored in
 
 * [Ruby](https://www.ruby-lang.org/)
 * [PostgreSQL](http://www.postgresql.org/)
+* [PhantomJS](http://phantomjs.org/), optional, for end-to-end testing
 
 It is highly recommended to configure PostgreSQL to allow passwordless local
 connections, for convenience's sake.  This is not strictly required, but then

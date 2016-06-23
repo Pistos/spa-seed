@@ -6,6 +6,7 @@ Thread.abort_on_exception = true
 
 EventMachine.run do
   puts "Websocket server started"
+  puts "Environment: #{$conf.env.inspect}"
 
   server = ProjectName::WebsocketServer.new
 

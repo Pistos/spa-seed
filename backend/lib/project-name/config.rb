@@ -4,6 +4,8 @@ module ProjectName
   class ConfigError < StandardError; end
 
   class Config
+    attr_reader :env
+
     def initialize
       @env = ENV['PROJECT_NAME_ENV'] || 'development'
       @default_configuration = read_conf_from_yaml_file('./defaults.yaml')

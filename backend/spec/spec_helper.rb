@@ -3,9 +3,14 @@ if ENV['PROJECT_NAME_ENV'] != 'test' && ! ENV['PROJECT_NAME_ENV_FORCE']
   exit 1
 end
 
+# TODO: We should probably start up a separate frontend and backend for the
+# e2e tests.  There's risk someone will run tests against their development or
+# production DB!
+
 require 'project-name/config'
 require 'project-name/model'
 
+require 'capybara/rspec'
 require 'database_cleaner'
 require 'factory_girl'
 require 'pry'
@@ -32,10 +37,21 @@ RSpec.configure do |config|
       example.run
     end
   end
+
+  config.after(:each, js: true) do
+    page.execute_script('localStorage.clear()')
+  end
 end
 
 RSpec::Matchers.define :json_hash do |hash|
   match { |actual|
     JSON.parse(actual) == hash
   }
+end
+
+if ENV['TEST_WITH_BROWSER']
+  Capybara.default_driver = :selenium
+else
+  require 'capybara/poltergeist'
+  Capybara.javascript_driver = :poltergeist
 end
