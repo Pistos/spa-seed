@@ -2,6 +2,7 @@ import JwtInterface from './JwtInterface'
 import Websocket from './Websocket'
 import WebsocketDispatcher from './WebsocketDispatcher'
 import store from './store'
+import { dispatchThingsSet } from './store/actions'
 
 export default {
 
@@ -11,7 +12,7 @@ export default {
     Websocket.transmit(
       JSON.stringify({
         id: id,
-        jwt: JwtInterface.getters.jwt(),
+        jwt: JwtInterface.state.jwt,
         message: message,
         args: args,
       })
@@ -23,7 +24,7 @@ export default {
       '/things',
       {},
       function (response) {
-        store.actions.dispatchThingsSet(response)
+        dispatchThingsSet(store, response)
       }
     )
   },

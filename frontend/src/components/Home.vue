@@ -14,15 +14,16 @@
 import Thing from './Thing'
 import NewThing from './NewThing'
 import backend from '../backend'
-import store from '../store'
 
 export default {
   components: {
     NewThing,
     Thing,
   },
-  computed: {
-    things: store.getters.things,
+  vuex: {
+    getters: {
+      things: state => state.things,
+    },
   },
   route: {
     data: function (transition) {

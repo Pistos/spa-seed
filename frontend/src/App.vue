@@ -14,16 +14,22 @@
 
 <script>
 import JwtInterface from './JwtInterface'
+import store from './store'
 
 export default {
+  store,
   computed: {
     jwt: function () {
-      return JwtInterface.getters.jwt()
+      /* TOOD: I assume we shouldn't reach in and access the state directly like this */
+      return JwtInterface.state.jwt
     },
   },
   methods: {
+    jwtClear: function () {
+      JwtInterface.dispatch('CLEAR')
+    },
     signOut: function (ev) {
-      JwtInterface.actions.clear()
+      this.jwtClear()
       this.$router.go('/')
     },
   },

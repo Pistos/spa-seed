@@ -1,3 +1,5 @@
+// TODO: Don't put `dispatch` in the front of all these action names
+
 export const dispatchThingsSet = ({dispatch, state}, things) => {
   dispatch('THINGS_SET', things)
 }

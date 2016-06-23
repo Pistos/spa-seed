@@ -29,6 +29,13 @@ export default {
       password: '',
     }
   },
+  vuex: {
+    actions: {
+      jwtSet: function ({ dispatch }, newJwt) {
+        JwtInterface.dispatch('SET', newJwt)
+      },
+    },
+  },
   methods: {
     submit: function (ev) {
       let self = this
@@ -40,7 +47,7 @@ export default {
             console.log('Sign in error: ' + response.error)
           } else {
             console.log('Sign in successful')
-            JwtInterface.actions.set(response.jwt)
+            self.jwtSet(response.jwt)
             self.$router.go('/home')
           }
         }

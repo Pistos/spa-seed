@@ -1,5 +1,3 @@
 export default {
-  things: function (state) {
-    return state.things
-  },
+  things: state => state.things,
 }

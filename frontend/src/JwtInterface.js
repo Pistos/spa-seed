@@ -6,32 +6,18 @@ const state = {
   jwt: window.localStorage.getItem('jwt'),
 }
 
-const actions = {
-  set: 'SET',
-  clear: 'CLEAR',
-}
-
-/*eslint no-useless-computed-key: 0*/
 const mutations = {
-  ['SET'] (state, newValue) {
+  SET (state, newValue) {
     state.jwt = newValue
     window.localStorage.setItem('jwt', newValue)
   },
-  ['CLEAR'] (state) {
+  CLEAR (state) {
     state.jwt = null
     window.localStorage.removeItem('jwt')
   },
 }
 
-const getters = {
-  jwt: function (state) {
-    return state.jwt
-  },
-}
-
 export default new Vuex.Store({
   state,
-  actions,
   mutations,
-  getters,
 })

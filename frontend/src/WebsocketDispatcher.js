@@ -1,4 +1,5 @@
 import store from './store'
+import * as actions from './store/actions'
 
 if( ! window.websocketDispatcher ) {
   window.websocketDispatcher = {
@@ -6,17 +7,17 @@ if( ! window.websocketDispatcher ) {
     handlers: {
       '/things/create': [
         function (args) {
-          store.actions.dispatchThingCreate(args)
+          actions.dispatchThingCreate(store, args)
         },
       ],
       '/things/update': [
         function (args) {
-          store.actions.dispatchThingUpdate(args)
+          actions.dispatchThingUpdate(store, args)
         },
       ],
       '/things/delete': [
         function (args) {
-          store.actions.dispatchThingDelete(args)
+          actions.dispatchThingDelete(store, args)
         },
       ],
     },
