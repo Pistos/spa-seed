@@ -2,14 +2,7 @@ require 'spec_helper'
 
 describe 'Signing In', :type => :feature, js: true do
   context 'given a user' do
-    let(:username) { 'joe' }
-    let(:password) { 'abcd' }
-    let(:user) {
-      FactoryGirl.create(:user, username: username).tap { |u|
-        u.password = password
-        u.save
-      }
-    }
+    include_context 'given a user'
 
     scenario 'signing in' do
       expect(ProjectName::Model::User[user.id]).not_to be_nil

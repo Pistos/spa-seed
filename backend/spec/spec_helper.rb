@@ -18,6 +18,10 @@ require 'pry'
 require 'factories'
 require 'spec-helpers'
 
+Dir['./spec/support/**/*.rb'].sort.each do |f|
+  require f
+end
+
 # So that FactoryGirl can be used with Sequel
 class Sequel::Model
   alias_method :save!, :save

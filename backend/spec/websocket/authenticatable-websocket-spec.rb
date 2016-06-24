@@ -43,14 +43,7 @@ describe ProjectName::Websocket::AuthenticatableWebsocket do
     let(:json_payload) { payload.to_json }
 
     context 'given a user' do
-      let(:username) { 'joe' }
-      let(:password) { 'abcd' }
-      let(:user) {
-        FactoryGirl.create(:user, username: username).tap { |u|
-          u.password = password
-          u.save
-        }
-      }
+      include_context 'given a user'
 
       context 'when the correct credentials are supplied' do
         let(:jwt) {

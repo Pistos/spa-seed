@@ -12,14 +12,7 @@ describe ProjectName::Websocket::Handler::Users::Authentications::Create do
   }
 
   context 'given a user' do
-    let(:username) { 'joe' }
-    let(:password) { 'abcd' }
-    let(:user) {
-      FactoryGirl.create(:user, username: username).tap { |u|
-        u.password = password
-        u.save
-      }
-    }
+    include_context 'given a user'
 
     before do
       user
