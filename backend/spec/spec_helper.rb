@@ -43,10 +43,6 @@ RSpec.configure do |config|
       example.run
     end
   end
-
-  config.after(:each, js: true) do
-    page.execute_script('localStorage.clear()')
-  end
 end
 
 RSpec::Matchers.define :json_hash do |hash|
