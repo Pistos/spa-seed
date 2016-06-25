@@ -10,5 +10,6 @@ shared_context 'given a signed-in user' do
       $conf['jwt_secret']
     )
     page.execute_script "localStorage.setItem('jwt', '#{jwt}')"
+    visit 'http://localhost:3010/!#/home'
   end
 end
