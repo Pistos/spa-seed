@@ -28,6 +28,8 @@ class Sequel::Model
 end
 
 RSpec.configure do |config|
+  config.pattern = '**{,/*/**}/*-spec.rb'
+
   config.include SpecHelpers
 
   config.before(:suite) do
