@@ -43,6 +43,11 @@ RSpec.configure do |config|
       example.run
     end
   end
+
+  config.before(:each, js: true) do
+    visit 'http://localhost:3010/'
+    page.execute_script %{localStorage.clear()}
+  end
 end
 
 RSpec::Matchers.define :json_hash do |hash|
