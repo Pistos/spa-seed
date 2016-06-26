@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(require('vue-router'))
 Vue.config.debug = true
 
+import './Array.prototype.find'
 import App from './App'
 import Home from './components/Home'
 import SignIn from './components/SignIn'
