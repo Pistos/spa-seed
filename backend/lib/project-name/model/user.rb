@@ -4,6 +4,8 @@ require 'bcrypt'
 module ProjectName
   module Model
     class User < Model::Base
+      one_to_many :restricted_things, key: :owner_user_id
+
       def password
         BCrypt::Password.new(self.encrypted_password)
       end
