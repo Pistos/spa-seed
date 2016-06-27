@@ -3,11 +3,12 @@
 This is seed code for a single-page web application.  Use it as an example to
 learn from, or a basis for a full SPA of your own.
 
-## Features
+## Features / Flaws
 
 * Both frontend (client-side / browser) and backend (server-side)
 * Authentication using JSON Web Tokens ([JWT](http://jwt.io/))
 * Two-way, asynchronous frontend-backend communication (server can push)
+* No AJAX, no REST API -- uses websockets for FE-BE communication
 
 ## Setup
 

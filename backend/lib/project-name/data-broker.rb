@@ -41,6 +41,8 @@ module ProjectName
           }.to_json
         end
       when 'delete'
+        # TODO: Check visibility here as well.  This will be tricky because
+        # the record is already gone by now
         payload = {
           'message' => '/things/delete',
           'args' => {'id' => event.payload.to_i},
