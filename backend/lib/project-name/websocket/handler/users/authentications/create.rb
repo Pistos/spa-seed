@@ -1,5 +1,6 @@
 require 'jwt'
 require 'project-name/model'
+require 'project-name/jwt'
 require 'project-name/websocket/handler/direct'
 
 module ProjectName
@@ -19,8 +20,7 @@ module ProjectName
               )
 
               if user
-                payload = { 'user_id' => user.id }
-                { 'jwt' => JWT.encode(payload, $conf['jwt_secret']) }
+                { 'jwt' => ProjectName::JWT.for(user: user) }
               else
                 { 'error' => 'No user found' }
               end

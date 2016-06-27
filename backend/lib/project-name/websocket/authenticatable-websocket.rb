@@ -25,14 +25,14 @@ module ProjectName
         jwt = payload['jwt'].to_s
 
         begin
-          jwt_payload = JWT.decode(
+          jwt_payload = ::JWT.decode(
             jwt,
             $conf['jwt_secret']
           )
           if jwt_payload
             @user = Model::User[id: jwt_payload[0]['user_id'].to_i]
           end
-        rescue JWT::DecodeError
+        rescue ::JWT::DecodeError
         end
       end
 

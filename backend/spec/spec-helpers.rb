@@ -5,10 +5,7 @@ module SpecHelpers
     ProjectName::Websocket::AuthenticatableWebsocket.new(
       websocket: double("Websocket")
     ).tap { |aws|
-      jwt = JWT.encode(
-        {'user_id' => user.id},
-        $conf['jwt_secret']
-      )
+      jwt = ProjectName::JWT.for(user: user)
 
       json_payload = {
         'id' => 1,

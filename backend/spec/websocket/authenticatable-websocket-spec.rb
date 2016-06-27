@@ -46,12 +46,7 @@ describe ProjectName::Websocket::AuthenticatableWebsocket do
       include_context 'given a user'
 
       context 'when the correct credentials are supplied' do
-        let(:jwt) {
-          JWT.encode(
-            {'user_id' => user.id},
-            $conf['jwt_secret']
-          )
-        }
+        let(:jwt) { ProjectName::JWT.for(user: user) }
 
         it 'sets the user' do
           expect(aws.user).to be_a(ProjectName::Model::NilUser)
