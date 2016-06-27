@@ -13,7 +13,6 @@
 <script>
 import Thing from './Thing'
 import NewThing from './NewThing'
-import backend from '../backend'
 
 export default {
   components: {
@@ -23,13 +22,6 @@ export default {
   vuex: {
     getters: {
       things: state => state.things,
-    },
-  },
-  route: {
-    data: function (transition) {
-      /* TODO: This data load probably belongs elsewhere, in some
-      earlier global initialization code */
-      backend.thingsLoad()
     },
   },
 }

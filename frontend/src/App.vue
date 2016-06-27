@@ -39,6 +39,7 @@ export default {
   ready: function () {
     backend.usersLoad()
     backend.usersOwnId()
+    backend.thingsLoad()
   },
   methods: {
     jwtClear: function () {
