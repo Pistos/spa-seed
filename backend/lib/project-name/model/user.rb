@@ -33,6 +33,13 @@ module ProjectName
           event_receiver: event_receiver
         )
       end
+
+      def to_serializable
+        {
+          'id' => self.id,
+          'username' => self.username,
+        }
+      end
     end
   end
 end

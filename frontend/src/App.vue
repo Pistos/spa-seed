@@ -14,15 +14,24 @@
 
 <script>
 import JwtInterface from './JwtInterface'
+import backend from './backend'
 import store from './store'
 
 export default {
   store,
+  vuex: {
+    getters: {
+      userId: state => state.userId,
+      users: state => state.users,
+    },
+  },
   computed: {
     jwt: function () {
-      /* TOOD: I assume we shouldn't reach in and access the state directly like this */
       return JwtInterface.state.jwt
     },
+  },
+  ready: function () {
+    backend.usersLoad()
   },
   methods: {
     jwtClear: function () {

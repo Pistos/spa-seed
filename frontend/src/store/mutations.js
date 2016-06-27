@@ -21,4 +21,7 @@ export default {
     )
     state.things.$remove(deletedThing)
   },
+  [mtypes.USERS_SET] (state, newUsers) {
+    state.users = newUsers
+  },
 }

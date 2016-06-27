@@ -6,6 +6,7 @@ import mutations from './mutations'
 
 const state = {
   things: [],
+  users: [],
 }
 
 export default new Vuex.Store({

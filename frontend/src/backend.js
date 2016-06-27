@@ -2,7 +2,10 @@ import JwtInterface from './JwtInterface'
 import Websocket from './Websocket'
 import WebsocketDispatcher from './WebsocketDispatcher'
 import store from './store'
-import { dispatchThingsSet } from './store/actions'
+import {
+  dispatchThingsSet,
+  dispatchUsersSet,
+} from './store/actions'
 
 export default {
 
@@ -67,6 +70,16 @@ export default {
         password: password,
       },
       onSuccess
+    )
+  },
+
+  usersLoad: function () {
+    this.send(
+      '/users',
+      {},
+      function (response) {
+        dispatchUsersSet(store, response)
+      }
     )
   },
 

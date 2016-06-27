@@ -18,3 +18,7 @@ export const dispatchThingUpdate = ({dispatch, state}, response) => {
 export const dispatchThingDelete = ({dispatch, state}, response) => {
   dispatch('THING_DELETE', response)
 }
+
+export const dispatchUsersSet = ({dispatch, state}, users) => {
+  dispatch('USERS_SET', users)
+}

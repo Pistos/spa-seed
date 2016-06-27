@@ -56,6 +56,11 @@ module ProjectName
             username: @args['username'].to_s,
             password: @args['password'].to_s
           )
+        when '/users'
+          Websocket::Handler::Users::List.new(
+            websocket: @websocket,
+            websocket_message_id: @id
+          )
         when '/things'
           Websocket::Handler::Things::List.new(
             websocket: @websocket,
