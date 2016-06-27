@@ -22,3 +22,7 @@ export const dispatchThingDelete = ({dispatch, state}, response) => {
 export const dispatchUsersSet = ({dispatch, state}, users) => {
   dispatch('USERS_SET', users)
 }
+
+export const dispatchUsersOwnId = ({dispatch, state}, response) => {
+  dispatch('USERS_OWN_ID', response)
+}

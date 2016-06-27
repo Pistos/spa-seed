@@ -61,6 +61,11 @@ module ProjectName
             websocket: @websocket,
             websocket_message_id: @id
           )
+        when '/users/own-id'
+          Websocket::Handler::Users::OwnId.new(
+            websocket: @websocket,
+            websocket_message_id: @id
+          )
         when '/things'
           Websocket::Handler::Things::List.new(
             websocket: @websocket,

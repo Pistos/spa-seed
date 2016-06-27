@@ -4,6 +4,7 @@ import WebsocketDispatcher from './WebsocketDispatcher'
 import store from './store'
 import {
   dispatchThingsSet,
+  dispatchUsersOwnId,
   dispatchUsersSet,
 } from './store/actions'
 
@@ -79,6 +80,16 @@ export default {
       {},
       function (response) {
         dispatchUsersSet(store, response)
+      }
+    )
+  },
+
+  usersOwnId: function () {
+    this.send(
+      '/users/own-id',
+      {},
+      function (response) {
+        dispatchUsersOwnId(store, response)
       }
     )
   },

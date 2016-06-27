@@ -6,6 +6,7 @@ import mutations from './mutations'
 
 const state = {
   things: [],
+  userId: null,
   users: [],
 }
 
