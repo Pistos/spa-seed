@@ -4,6 +4,10 @@ require 'project-name/websocket-server'
 
 Thread.abort_on_exception = true
 
+if $conf.env == 'development'
+  require 'pry-byebug'
+end
+
 EventMachine.run do
   puts "Websocket server started"
   puts "Environment: #{$conf.env.inspect}"
