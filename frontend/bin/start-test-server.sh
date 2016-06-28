@@ -1,0 +1,1 @@
+PORT=3011 WEBSOCKET_PORT=8082 npm run dev

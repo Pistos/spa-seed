@@ -11,7 +11,7 @@ describe 'Things: Delete', :type => :feature, js: true do
       let!(:thing2) { FactoryGirl.create(:thing, name: name2) }
 
       scenario 'deleting things' do
-        visit 'http://localhost:3010/#!/home'
+        visit "#{TEST_SERVER}!#/home"
 
         expect(page).to have_content(name1)
         expect(page).to have_content(name2)

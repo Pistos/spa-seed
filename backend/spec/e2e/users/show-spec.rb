@@ -5,7 +5,7 @@ describe 'Users: Show', :type => :feature, js: true do
     include_context 'given a signed-in user'
 
     scenario "viewing one's own page" do
-      visit "http://localhost:3010/#!/users/#{user.id}"
+      visit "#{TEST_SERVER}!#/users/#{user.id}"
 
       expect(page).to have_content(user.username)
     end

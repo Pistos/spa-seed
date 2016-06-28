@@ -9,7 +9,7 @@ describe 'Things: List', :type => :feature, js: true do
       let!(:thing2) { FactoryGirl.create(:thing, name: 'particular name 2') }
 
       scenario 'listing things' do
-        visit 'http://localhost:3010/#!/home'
+        visit "#{TEST_SERVER}!#/home"
 
         expect(page.evaluate_script(%{localStorage.getItem('jwt')})).not_to be_nil
 

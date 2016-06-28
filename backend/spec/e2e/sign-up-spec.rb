@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Signing Up', :type => :feature, js: true do
   scenario 'signing up' do
-    visit 'http://localhost:3010/'
+    visit TEST_SERVER
 
     click_link 'Sign Up'
 

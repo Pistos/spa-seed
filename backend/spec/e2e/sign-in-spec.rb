@@ -7,7 +7,7 @@ describe 'Signing In', :type => :feature, js: true do
     scenario 'signing in' do
       expect(ProjectName::Model::User[user.id]).not_to be_nil
 
-      visit 'http://localhost:3010/'
+      visit TEST_SERVER
 
       expect(page).not_to have_text('Home')
 

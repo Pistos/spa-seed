@@ -6,6 +6,7 @@ development:
     password: "spa_seed"
     num_connections: 40
   jwt_secret: ""
+  port: 8081
 test:
   db:
     host: "localhost"
@@ -14,3 +15,4 @@ test:
     password: "spa_seed"
     num_connections: 40
   jwt_secret: "test jwt secret"
+  port: 8082

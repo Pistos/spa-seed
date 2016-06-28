@@ -22,6 +22,8 @@ Dir['./spec/support/**/*.rb'].sort.each do |f|
   require f
 end
 
+TEST_SERVER = 'http://localhost:3011/'
+
 # So that FactoryGirl can be used with Sequel
 class Sequel::Model
   alias_method :save!, :save
@@ -45,7 +47,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each, js: true) do
-    visit 'http://localhost:3010/'
+    visit TEST_SERVER
     page.execute_script %{localStorage.clear()}
   end
 end

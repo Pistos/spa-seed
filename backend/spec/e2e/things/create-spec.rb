@@ -8,7 +8,7 @@ describe 'Things: Create', :type => :feature, js: true do
     let(:description) { 'description of the thing' }
 
     scenario 'creating things' do
-      visit 'http://localhost:3010/#!/home'
+      visit "#{TEST_SERVER}!#/home"
 
       expect(page).not_to have_content(name)
       expect(page).not_to have_content(description)

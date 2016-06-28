@@ -14,7 +14,7 @@ EventMachine.run do
 
   server = ProjectName::WebsocketServer.new
 
-  EventMachine::WebSocket.run(host: "0.0.0.0", port: 8081) do |ws|
+  EventMachine::WebSocket.run(host: "0.0.0.0", port: $conf['port']) do |ws|
     server.run(ws)
   end
 end
