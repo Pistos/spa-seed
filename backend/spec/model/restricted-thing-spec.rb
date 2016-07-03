@@ -6,7 +6,7 @@ describe ProjectName::Model::RestrictedThing do
     let(:user2) { rthing2.owner }
 
     describe '#visible_to?' do
-      it "is try only for the thing's owner" do
+      it "is true only for the thing's owner" do
         expect(rthing1).to be_visible_to(user: user1)
         expect(rthing1).not_to be_visible_to(user: user2)
         expect(rthing2).to be_visible_to(user: user2)
